@@ -1,5 +1,16 @@
 .App {
+  display: flex;
   text-align: center;
+}
+
+aside {
+  width: 20%;
+}
+
+.main-container {
+  width: 80%;
+  display: flex;
+  flex-direction: column;
 }
 
 .App-logo {
