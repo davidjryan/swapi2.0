@@ -12,7 +12,7 @@ export async function getPeople() {
     let personSpecies = await speciesFetch.json()
     const speciesName = personSpecies.name
 
-    return Object.assign({}, name: person.name, homeworld: name, species: speciesName, population)
+    return Object.assign({}, {name: person.name, homeworld: name, species: speciesName, population})
   })
 
   return Promise.all(unresolvedPromises)
@@ -26,7 +26,18 @@ export async function getPlanets() {
   const unresolvedPromises = results.map(async(planet) => {
     let residentsFetch = await fetch(planet.residents)
     let residentsData = await residentsFetch.json()
-    const unresolvedResidents = 
+
+    const unresolvedResidents = residentsData.map(async(resident) => {
+      let residentNameFetch = await fetch(resident.name)
+      let residentNameData = await residentNameFetch.json()
+      const residentName = residentNameData.name
+
+      return residentName
+    })
+
+    const residents = Promise.all(unresolvedResidents)
+
+    return Object.assign({}, )
   })
 }
 
