@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import { getPeople,
+         getPlanets,
+         getVehicles,
+         getCrawl,
+         randomizer } from './helper.js';
 import './App.css';
 
 class App extends Component {
@@ -7,22 +12,30 @@ class App extends Component {
     super();
 
     this.state = {
-      scroll: null,
-      people: null,
+      crawl: {},
+      people: [],
       planets: null,
       vehicles: null,
       display: ''
     }
   }
 
-  componentDidMount() {
+  async componentDidMount() {
+    const crawl = await getCrawl(randomizer());
+    const people = await getPeople();
+    const planets = await getPlanets();
 
+    this.setState({crawl, people: people, planets: null, vehicles: null, display: ''});
   }
 
   render() {
     return (
       <div className="App">
-          <aside></aside>
+          <aside>
+            <p>{this.state.crawl.crawl}</p>
+            <h3>{this.state.crawl.title}</h3>
+            <p>{this.state.crawl.date}</p>
+          </aside>
         <div className="main-container">
           <header className="App-header">
             <h1 className="App-title">Star Wars</h1>
