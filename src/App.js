@@ -24,8 +24,10 @@ class App extends Component {
     const crawl = await getCrawl(randomizer());
     const people = await getPeople();
     const planets = await getPlanets();
+    const vehicles = await getVehicles();
 
-    this.setState({crawl, people: people, planets: null, vehicles: null, display: ''});
+
+    this.setState({crawl, people, planets, vehicles, display: ''});
   }
 
   render() {

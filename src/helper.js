@@ -36,9 +36,12 @@ export async function getPlanets() {
     })
 
     const residents = Promise.all(unresolvedResidents)
+    const { name, terrain, population, climate } = planet
 
-    return Object.assign({}, )
+    return Object.assign({}, {name, terrain, population, climate, residents})
   })
+
+  return Promise.all(unresolvedPromises)
 }
 
 export async function getVehicles() {
