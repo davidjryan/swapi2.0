@@ -21,7 +21,7 @@ export async function getPeople() {
 export async function getPlanets() {
   const planets = await fetch(`https://swapi.co/api/planets/`)
   const planetData = await planets.json()
-  let { results } = planetData
+  const { results } = planetData
 
   const unresolvedPromises = results.map(async(planet) => {
     let residentsFetch = await fetch(planet.residents)
@@ -45,7 +45,17 @@ export async function getPlanets() {
 }
 
 export async function getVehicles() {
+  const vehicles = await fetch(`https://swapi.co/api/vehicles/`)
+  const vehicleData = await vehicles.json()
+  const { results } = vehicleData
 
+  const reconstructedVehicles = results.map((vehicle) => {
+    const { name, model, passengers } = vehicle
+
+    return Object.assign({}, {name, model, vClass: vehicle.class, passengers})
+  })
+
+  return reconstructedVehicles
 }
 
 export async function getCrawl(number) {
