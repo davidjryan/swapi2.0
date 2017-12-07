@@ -13,7 +13,7 @@ class App extends Component {
 
     this.state = {
       crawl: {},
-      people: null,
+      people: [],
       planets: null,
       vehicles: null,
       display: ''
@@ -23,8 +23,9 @@ class App extends Component {
   async componentDidMount() {
     const crawl = await getCrawl(randomizer());
     const people = await getPeople();
+    const planets = await getPlanets();
 
-    this.setState({crawl, people: null, planets: null, vehicles: null, display: ''});
+    this.setState({crawl, people: people, planets: null, vehicles: null, display: ''});
   }
 
   render() {

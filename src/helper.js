@@ -2,6 +2,7 @@ export async function getPeople() {
   const people = await fetch(`https://swapi.co/api/people/`)
   const peopleData = await people.json()
   const { results } = peopleData
+
   const unresolvedPromises = results.map(async(person) => {
     let homeworldFetch = await fetch(person.homeworld)
     let personHomeworld = await homeworldFetch.json()
@@ -9,12 +10,24 @@ export async function getPeople() {
 
     let speciesFetch = await fetch(person.species)
     let personSpecies = await speciesFetch.json()
-    const { name } 
+    const speciesName = personSpecies.name
+
+    return Object.assign({}, name: person.name, homeworld: name, species: speciesName, population)
   })
+
+  return Promise.all(unresolvedPromises)
 }
 
 export async function getPlanets() {
+  const planets = await fetch(`https://swapi.co/api/planets/`)
+  const planetData = await planets.json()
+  let { results } = planetData
 
+  const unresolvedPromises = results.map(async(planet) => {
+    let residentsFetch = await fetch(planet.residents)
+    let residentsData = await residentsFetch.json()
+    const unresolvedResidents = 
+  })
 }
 
 export async function getVehicles() {
