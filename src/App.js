@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
+import {getPeople, getPlanets, getVehicles, getScroll} from './helper.js';
 import './App.css';
 
 class App extends Component {
@@ -16,7 +17,7 @@ class App extends Component {
   }
 
   componentDidMount() {
-
+    getScroll()
   }
 
   render() {
