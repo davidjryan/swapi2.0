@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
-import {getPeople, getPlanets, getVehicles, getScroll} from './helper.js';
+import { getPeople,
+         getPlanets,
+         getVehicles,
+         getCrawl,
+         randomizer } from './helper.js';
 import './App.css';
 
 class App extends Component {
@@ -8,7 +12,7 @@ class App extends Component {
     super();
 
     this.state = {
-      scroll: null,
+      crawl: null,
       people: null,
       planets: null,
       vehicles: null,
@@ -16,14 +20,19 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
-    getScroll()
+  async componentDidMount() {
+    const crawl = await getCrawl(randomizer());
+
+    this.setState({crawl, people: null, planets: null, vehicles: null, display: ''})
+    debugger;
   }
 
   render() {
     return (
       <div className="App">
-          <aside></aside>
+          <aside>
+
+          </aside>
         <div className="main-container">
           <header className="App-header">
             <h1 className="App-title">Star Wars</h1>
