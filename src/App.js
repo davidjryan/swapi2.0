@@ -14,8 +14,8 @@ class App extends Component {
     this.state = {
       crawl: {},
       people: [],
-      planets: null,
-      vehicles: null,
+      planets: [],
+      vehicles: [],
       display: ''
     }
   }
