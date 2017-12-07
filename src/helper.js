@@ -1,5 +1,12 @@
 export async function getPeople() {
-
+  const people = await fetch(`https://swapi.co/api/people/`)
+  const peopleData = await people.json()
+  const { results } = peopleData
+  const unresolvedPromises = results.map(async(person) => {
+    let homeworldFetch = await fetch(person.homeworld)
+    let personHomeworld = await homeworldFetch.json()
+    
+  })
 }
 
 export async function getPlanets() {

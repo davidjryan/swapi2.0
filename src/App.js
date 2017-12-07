@@ -12,7 +12,7 @@ class App extends Component {
     super();
 
     this.state = {
-      crawl: null,
+      crawl: {},
       people: null,
       planets: null,
       vehicles: null,
@@ -22,16 +22,18 @@ class App extends Component {
 
   async componentDidMount() {
     const crawl = await getCrawl(randomizer());
+    const people = await getPeople();
 
-    this.setState({crawl, people: null, planets: null, vehicles: null, display: ''})
-    debugger;
+    this.setState({crawl, people: null, planets: null, vehicles: null, display: ''});
   }
 
   render() {
     return (
       <div className="App">
           <aside>
-
+            <p>{this.state.crawl.crawl}</p>
+            <h3>{this.state.crawl.title}</h3>
+            <p>{this.state.crawl.date}</p>
           </aside>
         <div className="main-container">
           <header className="App-header">
