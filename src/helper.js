@@ -5,7 +5,11 @@ export async function getPeople() {
   const unresolvedPromises = results.map(async(person) => {
     let homeworldFetch = await fetch(person.homeworld)
     let personHomeworld = await homeworldFetch.json()
-    
+    const { name, population } = personHomeworld
+
+    let speciesFetch = await fetch(person.species)
+    let personSpecies = await speciesFetch.json()
+    const { name } 
   })
 }
 
