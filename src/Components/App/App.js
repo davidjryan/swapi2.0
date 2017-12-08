@@ -32,25 +32,12 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-          <aside>
-            <p>{this.state.crawl.crawl}</p>
-            <h3>{this.state.crawl.title}</h3>
-            <p>{this.state.crawl.date}</p>
-          </aside>
+        <Crawl />
         <div className="main-container">
-          <header className="App-header">
-            <h1 className="App-title">Star Wars</h1>
-            <button className="favorites">Favorites<span>10</span></button>
-          </header>
+          <Header />
           <hr />
-          <nav className="Data-nav">
-            <button className="People-button">people</button>
-            <button className="Planets-button">planets</button>
-            <button className="Vehicles-button">vehicles</button>
-          </nav>
-          <section className="Card-container">
-
-          </section>
+          <Nav />
+          <CardContainer />
         </div>
       </div>
     );
