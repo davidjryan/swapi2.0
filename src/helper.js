@@ -8,10 +8,11 @@ export async function fetchPeople() {
 
 export function cleanPeople(people) {
   const cleaned = people.map((person) => {
-    const { name, homeworld, species, population} = person
+    let { name, homeworld, species} = person
 
-    return {name, homeworld, species, population}
-  })
+
+    return {name, homeworld, species, fav: false}
+  });
 
   return cleaned;
 }
@@ -19,19 +20,22 @@ export function cleanPeople(people) {
 export async function fetchHomeworld(endpoint) {
   let homeworldFetch = await fetch(`${endpoint}`)
   let personHomeworld = await homeworldFetch.json()
-  const { results } = personHomeworld
+  const { name, population } = personHomeworld.results
 
-  return results;
+  return { homeworld: name, population };
 }
+
 
 export async function fetchSpecies(endpoint) {
   let speciesFetch = await fetch(`${endpoint}`)
   let personSpecies = await speciesFetch.json()
-  const { results } = personSpecies
+  const { name } = personSpecies.results
 
-  return results
+  return { species: name }
 
 }
+
+
   //Homeworld contructor
 //   const unresolvedPromises = results.map(async(person) => {
 //     let homeworldFetch = await fetch(person.homeworld)
@@ -90,9 +94,18 @@ export async function fetchResident(endpoint) {
 export async function fetchVehicles() {
   const vehicles = await fetch('https://swapi.co/api/vehicles/')
   const vehicleData = await vehicles.json()
-  const { results } = vehicleData
+  const { results } = vehicleData;
 
   return results;
+}
+
+export function cleanVehicles(vehicles) {
+  const cleaned = vehicles.map((vehicle) => {
+    const { name, model, passengers } = vehicle
+
+    return { name, model, class: vehicle.vehicle_class, passengers, fav: false}
+  })
+  return cleaned
 }
 
 export async function fetchCrawl(number) {
