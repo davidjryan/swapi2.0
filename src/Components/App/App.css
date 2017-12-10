@@ -26,14 +26,14 @@ hr {
 
 .App-header {
   display: flex;
-  align-items: center;
+  flex-direction: column;
+  justify-content: center;
   background-color: grey;
   height: 150px;
   color: white; }
 
 .App-title {
-  font-size: 1.5em;
-  margin-left: 45%; }
+  font-size: 1.5em; }
 
 .App-intro {
   font-size: large; }
@@ -43,10 +43,6 @@ hr {
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
-
-.favorites {
-  margin-left: auto;
-  height: 100px; }
 
 .Data-nav button {
   margin: 50px; }
@@ -59,7 +55,7 @@ hr {
 .Card {
   margin: 15px;
   background-color: teal;
-  width: 20%; }
+  width: 290px; }
 
 .Card-header {
   display: flex;
