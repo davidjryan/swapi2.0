@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Crawl = () => {
+const Crawl = ({crawl, title, date}) => {
 
   return (
     <aside>
-      <p>{this.state.crawl.crawl}</p>
-      <h3>{this.state.crawl.title}</h3>
-      <p>{this.state.crawl.date}</p>
+      <p>{crawl}</p>
+      <h3>{title}</h3>
+      <p>{date}</p>
     </aside>
   )
 }
