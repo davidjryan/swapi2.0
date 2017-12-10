@@ -1,9 +1,19 @@
-export async function fetchPeople(endpoint) {
+export async function fetchPeople() {
   const people = await fetch('https://swapi.co/api/people/')
   const peopleData = await people.json()
   const { results } = peopleData
 
   return results
+}
+
+export function cleanPeople(people) {
+  const cleaned = people.map((person) => {
+    const { name, homeworld, species, population} = person
+
+    return {name, homeworld, species, population}
+  })
+
+  return cleaned;
 }
 
 export async function fetchHomeworld(endpoint) {
@@ -38,7 +48,7 @@ export async function fetchSpecies(endpoint) {
 //   return Promise.all(unresolvedPromises)
 // }
 
-export async function fetchPlanets(endpoint) {
+export async function fetchPlanets() {
   const response = await fetch('https://swapi.co/api/planets/')
   const planetData = await response.json()
   const { results } = planetData
@@ -77,7 +87,7 @@ export async function fetchResident(endpoint) {
   //
   // return Promise.all(unresolvedPromises)
 
-export async function fetchVehicles(endpoint) {
+export async function fetchVehicles() {
   const vehicles = await fetch('https://swapi.co/api/vehicles/')
   const vehicleData = await vehicles.json()
   const { results } = vehicleData
