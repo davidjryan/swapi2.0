@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { getPeople,
-         getPlanets,
-         getVehicles,
-         getCrawl,
+import { fetchPeople,
+         fetchPlanets,
+         fetchVehicles,
+         fetchCrawl,
          randomizer } from '../../helper.js';
 
 import CardContainer from '../CardContainer/CardContainer';
@@ -27,14 +27,26 @@ class App extends Component {
 
   async componentDidMount() {
     try {
-      const crawl = await getCrawl(randomizer());
-      const people = await getPeople();
-      const planets = await getPlanets();
-      const vehicles = await getVehicles();
+      const crawl = await fetchCrawl(randomizer());
+      const people = await fetchPeople();
+      const planets = await fetchPlanets();
+      const vehicles = await fetchVehicles();
       this.setState({crawl, people, planets, vehicles, display: ''});
     } catch(error) {
       this.setState({errorStatus: error.message})
     }
+  }
+
+  navToggle() {
+
+  }
+
+  favoriteToggle(cardID) {
+    
+  }
+
+  favoriteViewToggle() {
+    //this.setState = {display: 'favorites'}
   }
 
   render() {
@@ -46,8 +58,8 @@ class App extends Component {
         <div className="main-container">
           <Header />
           <hr />
-          <Nav />
-          <CardContainer />
+          <Nav navToggle={this.navToggle.bind(this)}/>
+          <CardContainer dataSet={people}/>
         </div>
       </div>
     );
