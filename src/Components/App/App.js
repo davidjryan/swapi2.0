@@ -1,9 +1,15 @@
 import React, { Component } from 'react';
-import { getPeople,
-         getPlanets,
-         getVehicles,
-         getCrawl,
+import { fetchPeople,
+         fetchPlanets,
+         fetchVehicles,
+         fetchCrawl,
          randomizer } from '../../helper.js';
+
+import CardContainer from '../CardContainer/CardContainer';
+import Crawl from '../Crawl/Crawl';
+import Header from '../Header/Header';
+import Nav from '../Nav/Nav';
+
 import './App.css';
 
 class App extends Component {
@@ -20,24 +26,40 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    const crawl = await getCrawl(randomizer());
-    const people = await getPeople();
-    const planets = await getPlanets();
-    const vehicles = await getVehicles();
+    try {
+      const crawl = await fetchCrawl(randomizer());
+      const people = await fetchPeople();
+      const planets = await fetchPlanets();
+      const vehicles = await fetchVehicles();
+      this.setState({crawl, people, planets, vehicles, display: ''});
+    } catch(error) {
+      this.setState({errorStatus: error.message})
+    }
+  }
 
+  navToggle() {
 
-    this.setState({crawl, people, planets, vehicles, display: ''});
+  }
+
+  favoriteToggle(cardID) {
+    
+  }
+
+  favoriteViewToggle() {
+    //this.setState = {display: 'favorites'}
   }
 
   render() {
+    const { crawl, people, planets, vehicles } = this.state;
+
     return (
       <div className="App">
-        <Crawl />
+        <Crawl movieData={crawl}/>
         <div className="main-container">
           <Header />
           <hr />
-          <Nav />
-          <CardContainer />
+          <Nav navToggle={this.navToggle.bind(this)}/>
+          <CardContainer dataSet={people}/>
         </div>
       </div>
     );
