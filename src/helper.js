@@ -1,32 +1,49 @@
-export async function getPeople() {
-  const people = await fetch(`https://swapi.co/api/people/`)
+export async function fetchPeople(endpoint) {
+  const people = await fetch(`${endpoint}`)
   const peopleData = await people.json()
   const { results } = peopleData
 
-  const unresolvedPromises = results.map(async(person) => {
-    let homeworldFetch = await fetch(person.homeworld)
-    let personHomeworld = await homeworldFetch.json()
-    const { name, population } = personHomeworld
-
-    let speciesFetch = await fetch(person.species)
-    let personSpecies = await speciesFetch.json()
-    const speciesName = personSpecies.name
-
-    return Object.assign({}, {name: person.name, homeworld: name, species: speciesName, population})
-  })
-
-  return Promise.all(unresolvedPromises)
+  return results;
 }
 
-export async function getPlanets() {
-  const planets = await fetch(`https://swapi.co/api/planets/`)
-  const planetData = await planets.json()
+  
+  //Homeworld contructor
+//   const unresolvedPromises = results.map(async(person) => {
+//     let homeworldFetch = await fetch(person.homeworld)
+//     let personHomeworld = await homeworldFetch.json()
+//     const { name, population } = personHomeworld
+//
+//     let speciesFetch = await fetch(person.species)
+//     let personSpecies = await speciesFetch.json()
+//     const speciesName = personSpecies.name
+//
+//     return Object.assign({}, {name: person.name, homeworld: name, species: speciesName, population})
+//   })
+//
+//   return Promise.all(unresolvedPromises)
+// }
+
+export async function fetchPlanets(endpoint) {
+  const response = await fetch(`${endpoint}`)
+  const planetData = await response.json()
   const { results } = planetData
 
-  const unresolvedPromises = results.map(async(planet) => {
-    let residentsFetch = await fetch(planet.residents)
-    let residentsData = await residentsFetch.json()
+  return results
+}
 
+export async function fetchResident(endpoint) {
+  const response = await fetch(`${endpoint}`)
+  const residentData = await response.json()
+  const { results } = residentData
+
+  return results
+}
+
+export async function getPlanets(planets) {
+
+}
+
+export async function getResidents(residents) {
     const unresolvedResidents = residentsData.map(async(resident) => {
       let residentNameFetch = await fetch(resident.name)
       let residentNameData = await residentNameFetch.json()
@@ -34,15 +51,20 @@ export async function getPlanets() {
 
       return residentName
     })
-
-    const residents = Promise.all(unresolvedResidents)
-    const { name, terrain, population, climate } = planet
-
-    return Object.assign({}, {name, terrain, population, climate, residents})
-  })
-
-  return Promise.all(unresolvedPromises)
 }
+
+  // const unresolvedPromises = results.map(async(planet) => {
+  //   let residentsFetch = await fetch(planet.residents)
+  //   let residentsData = await residentsFetch.json()
+  //
+  //
+  //   const residents = Promise.all(unresolvedResidents)
+  //   const { name, terrain, population, climate } = planet
+  //
+  //   return Object.assign({}, {name, terrain, population, climate, residents})
+  // })
+  //
+  // return Promise.all(unresolvedPromises)
 
 export async function getVehicles() {
   const vehicles = await fetch(`https://swapi.co/api/vehicles/`)
@@ -60,9 +82,13 @@ export async function getVehicles() {
 
 export async function getCrawl(number) {
   const film = await fetch(`https://swapi.co/api/films/${number}`)
+  if(film.status === 404) {
+    throw(new Error('film not found'))
+  } else if(film.status > 404) {
+    throw(new Error('some other thing went wrong'))
+  }
   const filmData = await film.json()
   const { title, opening_crawl, release_date} = filmData;
-
 
   return {title, crawl: opening_crawl, date: release_date}
 }
