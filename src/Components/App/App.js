@@ -61,7 +61,6 @@ class App extends Component {
 
     return (
       <div className="App">
-        <Crawl movieData={crawl}/>
         <div className="main-container">
           <header className="App-header">
             <h1 className="App-title">Star Wars</h1>
