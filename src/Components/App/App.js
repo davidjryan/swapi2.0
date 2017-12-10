@@ -10,7 +10,6 @@ import { fetchPeople,
 
 import CardContainer from '../CardContainer/CardContainer';
 import Crawl from '../Crawl/Crawl';
-import Header from '../Header/Header';
 import Nav from '../Nav/Nav';
 
 import './App.css';
@@ -24,6 +23,7 @@ class App extends Component {
       people: [],
       planets: [],
       vehicles: [],
+      favorites: [],
       display: 'crawl'
     }
   }
@@ -34,37 +34,40 @@ class App extends Component {
       const people = await cleanPeople(await fetchPeople());
       const planets = await fetchPlanets();
       const vehicles = await cleanVehicles(await fetchVehicles());
-      this.setState({crawl, people, planets, vehicles, display: ''});
+      this.setState({crawl, people, planets, vehicles});
     } catch(error) {
       this.setState({errorStatus: error.message})
     }
   }
 
-  navToggle() {
-
+  navToggle(display) {
+    this.setState = { display }
   }
 
-  favoriteToggle(cardID) {
+  favoriteToggle(card) {
+    const { favorites } = this.state;
 
-  }
+    let newFavorites = [];
 
-  favoriteViewToggle() {
-    //this.setState = {display: 'favorites'}
+    favorites.includes(card) ?
+    newFavorites = favorites.filter( ele => ele !== card ) :
+    newFavorites = [...favorites, card];
+
+    this.setState({ favorites: newFavorites });
   }
 
   render() {
-    const { crawl, people, planets, vehicles } = this.state;
+    const { crawl, people, planets, vehicles, favorites, display } = this.state;
 
     return (
       <div className="App">
-        <Crawl movieData={crawl}/>
         <div className="main-container">
           <header className="App-header">
             <h1 className="App-title">Star Wars</h1>
           </header>
           <hr />
           <Nav navToggle={this.navToggle.bind(this)}/>
-          <CardContainer dataSet={people}/>
+          <CardContainer dataSet={this.state[display]} display={display} favoriteToggle={this.favoriteToggle.bind(this)}/>
         </div>
       </div>
     );
