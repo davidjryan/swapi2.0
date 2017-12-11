@@ -11,7 +11,6 @@ import { fetchPeople,
          randomizer } from '../../helper.js';
 
 import CardContainer from '../CardContainer/CardContainer';
-import Crawl from '../Crawl/Crawl';
 import Nav from '../Nav/Nav';
 
 import './App.css';
@@ -31,29 +30,38 @@ class App extends Component {
   }
 
   async componentDidMount() {
-    try {
-      const crawl = await fetchCrawl(randomizer());
-      const people = await cleanPeople(await fetchPeople());
-      const planets = await cleanPlanets(await fetchPlanets());
-      const vehicles = await cleanVehicles(await fetchVehicles());
-      this.setState({crawl, people, planets, vehicles});
-    } catch(error) {
-      this.setState({errorStatus: error.message})
+    let initialFetch = 0;
+    if (!initialFetch) {
+      try {
+        const crawl = await fetchCrawl(randomizer());
+        const people = await cleanPeople(await fetchPeople());
+        const planets = await cleanPlanets(await fetchPlanets());
+        const vehicles = await cleanVehicles(await fetchVehicles());
+        initialFetch++
+        this.setState({crawl, people, planets, vehicles});
+      } catch(error) {
+        this.setState({errorStatus: error.message})
+      }
     }
   }
 
   async navToggle(display) {
     const { people, planets } = this.state
     let build;
+    let peopleCount = 0;
+    let planetCount = 0;
 
-    if (display === 'people') {
+
+    if (display === 'people' && peopleCount === 0) {
       build = await buildPeople(people)
+      peopleCount++
       this.setState({ people: build, display })
-    } else if (display === 'planets') {
+    } else if (display === 'planets' && planetCount === 0) {
       build = await buildPlanets(planets)
+      planetCount++
       this.setState({ planets: build, display })
     }
-    
+
     this.setState({ display })
   }
 
@@ -70,7 +78,7 @@ class App extends Component {
   }
 
   render() {
-    const { crawl, people, planets, vehicles, favorites, display } = this.state;
+    const { display } = this.state;
 
     return (
       <div className="App">

@@ -1,17 +1,31 @@
 import React from 'react';
+import './Card.css';
+import PropTypes from 'prop-types';
 
-const Card = () => {
+const Card = ({cardData, favorite, display, favoriteToggle}) => {
+  const cardDataKeys = Object.keys(cardData)
+
+  const cardRender = cardDataKeys.map((cardKey, index) => {
+    if (cardKey !== 'name' && cardKey !== 'favorite') {
+      return (
+        <div key={`${cardKey} - ${cardData.name}`}>
+          <p className="Card-title">{cardData}</p>
+          <p className="Card-body">{cardData[cardKey]}</p>
+        </div>
+      );
+    }
+    return null;
+  });
+      )
+    }
+  })
 
   return (
     <article className="Card">
-      <header className="Card-header">
-        <p className="Card-title">Luke Skywalker</p>
-        <button className="Card-button">IMG</button>
-      </header>
+      <p className="Card-title">{cardData.name}</p>
       <hr />
-      <p>Tatooine</p>
-      <p>Jedi</p>
-      <p>Moisture Farmer</p>
+      <button className="Card-button" onClick={() => favoriteToggle(cardData)}>FAV</button>
+      { cardRender }
     </article>
   )
 }

@@ -9,12 +9,20 @@ const CardContainer = ({dataSet, display, favoriteToggle}) => {
     )
   }
 
+  // if (display === 'favorites' && dataSet.length = 0) {
+  //   return (
+  //     <section className="Card-container Fav-Container">
+  //       No Favorites Data...
+  //     </section>
+  //   )
+  // }
+
   const cardList = dataSet.map((card, index) => {
     return (
       <Card
         key={`${display}-${index}`}
         cardData={card}
-        favorite={dataSet.favorite}
+        favorite={card.favorite}
         display={display}
         favoriteToggle={favoriteToggle}
       />
