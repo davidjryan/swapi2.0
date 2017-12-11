@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { fetchPeople,
          cleanPeople,
+         buildPeople,
          fetchPlanets,
          cleanPlanets,
          fetchVehicles,
@@ -40,8 +41,16 @@ class App extends Component {
     }
   }
 
-  navToggle(display) {
-    this.setState = { display }
+  async navToggle(display) {
+    const { people, planets } = this.state
+    let build;
+
+    if (display === 'people') {
+      build = await buildPeople(people)
+    }
+
+    console.log(display)
+    this.setState({ display })
   }
 
   favoriteToggle(card) {

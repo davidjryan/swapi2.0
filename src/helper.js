@@ -20,7 +20,8 @@ export function cleanPeople(people) {
 export async function fetchHomeworld(endpoint) {
   let homeworldFetch = await fetch(`${endpoint}`)
   let personHomeworld = await homeworldFetch.json()
-  const { name, population } = personHomeworld.results
+
+  const { name, population } = personHomeworld
 
   return { homeworld: name, population };
 }
@@ -29,10 +30,22 @@ export async function fetchHomeworld(endpoint) {
 export async function fetchSpecies(endpoint) {
   let speciesFetch = await fetch(`${endpoint}`)
   let personSpecies = await speciesFetch.json()
-  const { name } = personSpecies.results
+  const { name } = personSpecies
 
   return { species: name }
 
+}
+
+export function buildPeople(people) {
+  const built = people.map(async(person) => {
+    const { homeworld, population } = await fetchHomeworld(person.homeworld)
+    const { species } = await fetchSpecies(person.species[0])
+    debugger;
+
+    return Object.assign( person, { homeworld, population, species })
+  })
+
+  return Promise.all(built);
 }
 
 
