@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const Nav = ({navToggle}) => {
 
@@ -12,4 +13,7 @@ const Nav = ({navToggle}) => {
   )
 }
 
+Nav.propTypes = {
+  navToggle: PropTypes.func.isRequired
+}
 export default Nav;
