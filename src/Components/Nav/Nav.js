@@ -9,13 +9,14 @@ const Nav = ({navToggle, favLength}) => {
       <button className="People-button" onClick={(event) => navToggle(event.target.innerText)}>people</button>
       <button className="Planets-button" onClick={(event) => navToggle(event.target.innerText)}>planets</button>
       <button className="Vehicles-button" onClick={(event) => navToggle(event.target.innerText)}>vehicles</button>
-      <button className="favorites" onClick={(event) => navToggle(event.target.innerText)}>favorites</button>
+      <button className="favorites" onClick={() => navToggle('favorites')}>favorites<span>{favLength}</span></button>
     </nav>
   );
 };
 
 Nav.propTypes = {
-  navToggle: PropTypes.func.isRequired
+  navToggle: PropTypes.func.isRequired,
+  favLength: PropTypes.number.isRequired
 };
 
 export default Nav;
