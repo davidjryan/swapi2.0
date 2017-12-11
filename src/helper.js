@@ -47,23 +47,6 @@ export function buildPeople(people) {
   return Promise.all(built);
 }
 
-
-  //Homeworld contructor
-//   const unresolvedPromises = results.map(async(person) => {
-//     let homeworldFetch = await fetch(person.homeworld)
-//     let personHomeworld = await homeworldFetch.json()
-//     const { name, population } = personHomeworld
-//
-//     let speciesFetch = await fetch(person.species)
-//     let personSpecies = await speciesFetch.json()
-//     const speciesName = personSpecies.name
-//
-//     return Object.assign({}, {name: person.name, homeworld: name, species: speciesName, population})
-//   })
-//
-//   return Promise.all(unresolvedPromises)
-// }
-
 export async function fetchPlanets() {
   const response = await fetch('https://swapi.co/api/planets/');
   const planetData = await response.json();

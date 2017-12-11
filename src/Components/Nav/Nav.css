@@ -1,0 +1,12 @@
+.Data-nav button {
+  color: white;
+  font-size: 17px;
+  border: none;
+  margin: 40px;
+  border-radius: 100px;
+  width: 109px;
+  height: 27px;
+  background: #c09c1a; }
+
+button:hover {
+  cursor: pointer; }

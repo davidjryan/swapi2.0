@@ -44,16 +44,3 @@ hr {
     transform: rotate(0deg); }
   to {
     transform: rotate(360deg); } }
-
-.Data-nav button {
-  color: white;
-  font-size: 17px;
-  border: none;
-  margin: 40px;
-  border-radius: 100px;
-  width: 109px;
-  height: 27px;
-  background: #c09c1a; }
-
-button:hover {
-  cursor: pointer; }

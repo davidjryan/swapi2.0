@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import './Nav.css';
 
-const Nav = ({navToggle}) => {
+const Nav = ({navToggle, favLength}) => {
 
   return (
     <nav className="Data-nav">

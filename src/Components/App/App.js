@@ -82,7 +82,7 @@ class App extends Component {
   }
 
   render() {
-    const { display, crawl } = this.state;
+    const { display, crawl, favorites } = this.state;
     if (crawl) {
       return (
         <div className="App">
@@ -91,7 +91,7 @@ class App extends Component {
               <h1 className="App-title">SwapiBox</h1>
             </header>
             <hr />
-            <Nav navToggle={this.navToggle.bind(this)}/>
+            <Nav navToggle={this.navToggle.bind(this)}                  favLength={favorites.length}/>
             <CardContainer dataSet={this.state[display]} display={display}
             favoriteToggle={this.favoriteToggle.bind(this)}/>
           </div>
