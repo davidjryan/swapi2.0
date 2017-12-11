@@ -3,7 +3,7 @@
   text-align: center; }
 
 body {
-  background-color: grey; }
+  background-color: #303030; }
 
 hr {
   color: black;
@@ -30,9 +30,11 @@ hr {
   color: white; }
 
 .App-title {
-  font-size: 1.5em;
-  color: #FED230;
-  margin: 0; }
+  font-size: 80px;
+  margin: 0;
+  margin-top: 111px;
+  letter-spacing: 32px;
+  color: #c0f2db; }
 
 .App-intro {
   font-size: large; }
@@ -44,24 +46,14 @@ hr {
     transform: rotate(360deg); } }
 
 .Data-nav button {
-  margin: 50px; }
+  color: white;
+  font-size: 17px;
+  border: none;
+  margin: 40px;
+  border-radius: 100px;
+  width: 109px;
+  height: 27px;
+  background: #c09c1a; }
 
-.Crawl-Container p {
-  color: #FED230; }
-
-.Card-container {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: black; }
-
-.Card {
-  margin: 10px;
-  background-color: teal;
-  width: 290px; }
-
-.Card-header {
-  display: flex;
-  justify-content: center; }
-
-.Card-button {
-  margin-left: auto; }
+button:hover {
+  cursor: pointer; }

@@ -20,13 +20,17 @@ class App extends Component {
     super();
 
     this.state = {
-      crawl: {},
+      crawl: null,
       people: [],
       planets: [],
       vehicles: [],
       favorites: [],
       display: 'crawl'
-    }
+    };
+  }
+
+  componentWillMount() {
+    this.navToggle(this.state.display);
   }
 
   async componentDidMount() {
@@ -37,32 +41,32 @@ class App extends Component {
         const people = await cleanPeople(await fetchPeople());
         const planets = await cleanPlanets(await fetchPlanets());
         const vehicles = await cleanVehicles(await fetchVehicles());
-        initialFetch++
+        initialFetch++;
         this.setState({crawl, people, planets, vehicles});
-      } catch(error) {
-        this.setState({errorStatus: error.message})
+      } catch (error) {
+        this.setState({errorStatus: error.message});
       }
     }
   }
 
   async navToggle(display) {
-    const { people, planets } = this.state
+    const { people, planets } = this.state;
     let build;
     let peopleCount = 0;
     let planetCount = 0;
 
 
     if (display === 'people' && peopleCount === 0) {
-      build = await buildPeople(people)
-      peopleCount++
-      this.setState({ people: build, display })
+      build = await buildPeople(people);
+      peopleCount++;
+      this.setState({ people: build, display });
     } else if (display === 'planets' && planetCount === 0) {
-      build = await buildPlanets(planets)
-      planetCount++
-      this.setState({ planets: build, display })
+      build = await buildPlanets(planets);
+      planetCount++;
+      this.setState({ planets: build, display });
     }
 
-    this.setState({ display })
+    this.setState({ display });
   }
 
   favoriteToggle(card) {
@@ -78,22 +82,28 @@ class App extends Component {
   }
 
   render() {
-    const { display } = this.state;
-
-    return (
-      <div className="App">
-        <div className="main-container">
-          <header className="App-header">
-            <h1 className="App-title">Swapi</h1>
-            <h1 className="App-title">Box</h1>
-          </header>
-          <hr />
-          <Nav navToggle={this.navToggle.bind(this)}/>
-          <CardContainer dataSet={this.state[display]} display={display}
-          favoriteToggle={this.favoriteToggle.bind(this)}/>
+    const { display, crawl } = this.state;
+    if (crawl) {
+      return (
+        <div className="App">
+          <div className="main-container">
+            <header className="App-header">
+              <h1 className="App-title">SwapiBox</h1>
+            </header>
+            <hr />
+            <Nav navToggle={this.navToggle.bind(this)}/>
+            <CardContainer dataSet={this.state[display]} display={display}
+            favoriteToggle={this.favoriteToggle.bind(this)}/>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="App">
+          Loading.......
+        </div>
+      );
+    }
   }
 }
 

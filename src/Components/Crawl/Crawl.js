@@ -1,7 +1,9 @@
 import React from 'react';
-import './Crawl.css'
+import './Crawl.css';
+import PropTypes from 'prop-types';
 
-const Crawl = ({dataSet}) => {;
+
+const Crawl = ({dataSet}) => {
   const {crawl, title, date} = dataSet;
   return (
     <section className="Card-container Crawl-container">
@@ -9,7 +11,11 @@ const Crawl = ({dataSet}) => {;
       <p>{crawl}</p>
       <p>{date}</p>
     </section>
-  )
-}
+  );
+};
+
+Crawl.propTypes = {
+  dataSet: PropTypes.object.isRequired
+};
 
 export default Crawl;
