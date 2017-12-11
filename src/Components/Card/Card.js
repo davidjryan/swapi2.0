@@ -15,3 +15,5 @@ const Card = () => {
     </article>
   )
 }
+
+export default Card;

@@ -11,7 +11,7 @@ export function cleanPeople(people) {
     let { name, homeworld, species} = person
 
 
-    return {name, homeworld, species, fav: false}
+    return {name, homeworld, species, favorite: false}
   });
 
   return cleaned;
@@ -103,7 +103,7 @@ export function cleanVehicles(vehicles) {
   const cleaned = vehicles.map((vehicle) => {
     const { name, model, passengers } = vehicle
 
-    return { name, model, class: vehicle.vehicle_class, passengers, fav: false}
+    return { name, model, class: vehicle.vehicle_class, passengers, favorite: false}
   })
   return cleaned
 }
