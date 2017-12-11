@@ -16,9 +16,6 @@ const Card = ({cardData, favorite, display, favoriteToggle}) => {
     }
     return null;
   });
-      )
-    }
-  })
 
   return (
     <article className="Card">
@@ -28,6 +25,11 @@ const Card = ({cardData, favorite, display, favoriteToggle}) => {
       { cardRender }
     </article>
   )
+}
+
+Card.propTypes = {
+  cardData: PropTypes.object.isRequired,
+  favoriteToggle: PropTypes.func.isRequired
 }
 
 export default Card;

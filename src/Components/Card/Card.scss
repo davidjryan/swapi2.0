@@ -1,0 +1,18 @@
+.Card {
+  margin: 10px;
+  background-color: teal;
+  width: 290px;
+}
+
+.Card-header {
+  display: flex;
+  justify-content: center;
+}
+
+.Card-title {
+  // text-align: center;
+}
+
+.Card-button {
+  margin-left: auto;
+}

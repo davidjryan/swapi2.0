@@ -1,6 +1,7 @@
 import React from 'react';
 import Crawl from '../Crawl/Crawl'
 import Card from '../Card/Card'
+import PropTypes from 'prop-types';
 
 const CardContainer = ({dataSet, display, favoriteToggle}) => {
   if (display === 'crawl') {
@@ -34,6 +35,12 @@ const CardContainer = ({dataSet, display, favoriteToggle}) => {
       { cardList }
     </section>
   )
+}
+
+CardContainer.propTypes = {
+  dataSet: PropTypes.object.isRequired,
+  favoriteToggle: PropTypes.func.isRequired,
+  display: PropTypes.string.isRequired
 }
 
 export default CardContainer;
