@@ -100,7 +100,7 @@ export function buildPlanets(planets) {
 
     residents = await Promise.all(residents)
 
-    return Object.assign(planet, { residents })
+    return Object.assign(planet, { residents: residents.join(', ') || 'none' })
   })
 
   return Promise.all(build)
