@@ -1,15 +1,20 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-const Nav = () => {
+const Nav = ({navToggle}) => {
 
   return (
     <nav className="Data-nav">
-      <button className="People-button">people</button>
-      <button className="Planets-button">planets</button>
-      <button className="Vehicles-button">vehicles</button>
-      <button className="favorites">favorites<span>10</span></button>
+      <button className="People-button" onClick={(event) => navToggle(event.target.innerText)}>people</button>
+      <button className="Planets-button" onClick={(event) => navToggle(event.target.innerText)}>planets</button>
+      <button className="Vehicles-button" onClick={(event) => navToggle(event.target.innerText)}>vehicles</button>
+      <button className="favorites" onClick={(event) => navToggle(event.target.innerText)}>favorites</button>
     </nav>
-  )
-}
+  );
+};
+
+Nav.propTypes = {
+  navToggle: PropTypes.func.isRequired
+};
 
 export default Nav;

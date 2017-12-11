@@ -1,15 +1,16 @@
 import React, { Component } from 'react';
 import { fetchPeople,
          cleanPeople,
+         buildPeople,
          fetchPlanets,
          cleanPlanets,
+         buildPlanets,
          fetchVehicles,
          cleanVehicles,
          fetchCrawl,
          randomizer } from '../../helper.js';
 
 import CardContainer from '../CardContainer/CardContainer';
-import Crawl from '../Crawl/Crawl';
 import Nav from '../Nav/Nav';
 
 import './App.css';
@@ -19,29 +20,53 @@ class App extends Component {
     super();
 
     this.state = {
-      crawl: {},
+      crawl: null,
       people: [],
       planets: [],
       vehicles: [],
       favorites: [],
       display: 'crawl'
-    }
+    };
+  }
+
+  componentWillMount() {
+    this.navToggle(this.state.display);
   }
 
   async componentDidMount() {
-    try {
-      const crawl = await fetchCrawl(randomizer());
-      const people = await cleanPeople(await fetchPeople());
-      const planets = await fetchPlanets();
-      const vehicles = await cleanVehicles(await fetchVehicles());
-      this.setState({crawl, people, planets, vehicles});
-    } catch(error) {
-      this.setState({errorStatus: error.message})
+    let initialFetch = 0;
+    if (!initialFetch) {
+      try {
+        const crawl = await fetchCrawl(randomizer());
+        const people = await cleanPeople(await fetchPeople());
+        const planets = await cleanPlanets(await fetchPlanets());
+        const vehicles = await cleanVehicles(await fetchVehicles());
+        initialFetch++;
+        this.setState({crawl, people, planets, vehicles});
+      } catch (error) {
+        this.setState({errorStatus: error.message});
+      }
     }
   }
 
-  navToggle(display) {
-    this.setState = { display }
+  async navToggle(display) {
+    const { people, planets } = this.state;
+    let build;
+    let peopleCount = 0;
+    let planetCount = 0;
+
+
+    if (display === 'people' && peopleCount === 0) {
+      build = await buildPeople(people);
+      peopleCount++;
+      this.setState({ people: build, display });
+    } else if (display === 'planets' && planetCount === 0) {
+      build = await buildPlanets(planets);
+      planetCount++;
+      this.setState({ planets: build, display });
+    }
+
+    this.setState({ display });
   }
 
   favoriteToggle(card) {
@@ -57,20 +82,28 @@ class App extends Component {
   }
 
   render() {
-    const { crawl, people, planets, vehicles, favorites, display } = this.state;
-
-    return (
-      <div className="App">
-        <div className="main-container">
-          <header className="App-header">
-            <h1 className="App-title">Star Wars</h1>
-          </header>
-          <hr />
-          <Nav navToggle={this.navToggle.bind(this)}/>
-          <CardContainer dataSet={this.state[display]} display={display} favoriteToggle={this.favoriteToggle.bind(this)}/>
+    const { display, crawl } = this.state;
+    if (crawl) {
+      return (
+        <div className="App">
+          <div className="main-container">
+            <header className="App-header">
+              <h1 className="App-title">SwapiBox</h1>
+            </header>
+            <hr />
+            <Nav navToggle={this.navToggle.bind(this)}/>
+            <CardContainer dataSet={this.state[display]} display={display}
+            favoriteToggle={this.favoriteToggle.bind(this)}/>
+          </div>
         </div>
-      </div>
-    );
+      );
+    } else {
+      return (
+        <div className="App">
+          Loading.......
+        </div>
+      );
+    }
   }
 }
 

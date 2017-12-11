@@ -4,16 +4,16 @@
 }
 
 body {
-  background-color: grey;
+  background-color: #303030;
 }
 
 hr {
   color: black;
-  width: 100%;
+  width: 95%;
 }
 
 .main-container {
-  width: 100%;
+  width: 98.5%;
   padding: 1.5%;
   display: flex;
   flex-direction: column;
@@ -26,15 +26,21 @@ hr {
 
 .App-header {
   display: flex;
-  flex-direction: column;
   justify-content: center;
-  background-color: grey;
-  height: 150px;
+  background-image: url(../../rogue-one-gallery32_ea791280.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center top;
+  height: 300px;
   color: white;
 }
 
 .App-title {
-  font-size: 1.5em;
+  font-size: 80px;
+  margin: 0;
+  margin-top: 111px;
+  letter-spacing: 32px;
+  color: #c0f2db;
 }
 
 .App-intro {
@@ -47,30 +53,16 @@ hr {
 }
 
 .Data-nav button {
-  margin: 50px;
+  color: white;
+  font-size: 17px;
+  border: none;
+  margin: 40px;
+  border-radius: 100px;
+  width: 109px;
+  height: 27px;
+  background: #c09c1a;
 }
 
-.Card-container {
-  display: flex;
-  flex-wrap: wrap;
-  background-color: black;
-}
-
-.Card {
-  margin: 15px;
-  background-color: teal;
-  width: 290px;
-}
-
-.Card-header {
-  display: flex;
-  justify-content: center;
-}
-
-.Card-title {
-  // text-align: center;
-}
-
-.Card-button {
-  margin-left: auto;
+button:hover {
+  cursor: pointer;
 }
