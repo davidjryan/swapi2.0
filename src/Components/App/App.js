@@ -67,7 +67,8 @@ class App extends Component {
           </header>
           <hr />
           <Nav navToggle={this.navToggle.bind(this)}/>
-          <CardContainer dataSet={this.state[display]} display={display} favoriteToggle={this.favoriteToggle.bind(this)}/>
+          <CardContainer dataSet={this.state[display]} display={display}
+          favoriteToggle={this.favoriteToggle.bind(this)}/>
         </div>
       </div>
     );
