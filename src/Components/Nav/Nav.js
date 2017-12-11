@@ -1,13 +1,13 @@
 import React from 'react';
 
-const Nav = () => {
+const Nav = ({navToggle}) => {
 
   return (
     <nav className="Data-nav">
-      <button className="People-button">people</button>
-      <button className="Planets-button">planets</button>
-      <button className="Vehicles-button">vehicles</button>
-      <button className="favorites">favorites<span>10</span></button>
+      <button className="People-button" onClick={(e) => navToggle(e.target.innerText)}>people</button>
+      <button className="Planets-button" onClick={(e) => navToggle(e.target.innerText)}>planets</button>
+      <button className="Vehicles-button" onClick={(e) => navToggle(e.target.innerText)}>vehicles</button>
+      <button className="favorites" onClick={(e) => navToggle(e.target.innerText)}>favorites<span>10</span></button>
     </nav>
   )
 }
