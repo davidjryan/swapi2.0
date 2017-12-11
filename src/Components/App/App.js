@@ -4,6 +4,7 @@ import { fetchPeople,
          buildPeople,
          fetchPlanets,
          cleanPlanets,
+         buildPlanets,
          fetchVehicles,
          cleanVehicles,
          fetchCrawl,
@@ -33,7 +34,7 @@ class App extends Component {
     try {
       const crawl = await fetchCrawl(randomizer());
       const people = await cleanPeople(await fetchPeople());
-      const planets = await fetchPlanets();
+      const planets = await cleanPlanets(await fetchPlanets());
       const vehicles = await cleanVehicles(await fetchVehicles());
       this.setState({crawl, people, planets, vehicles});
     } catch(error) {
@@ -47,9 +48,12 @@ class App extends Component {
 
     if (display === 'people') {
       build = await buildPeople(people)
+      this.setState({ people: build, display })
+    } else if (display === 'planets') {
+      build = await buildPlanets(planets)
+      this.setState({ planets: build, display })
     }
-
-    console.log(display)
+    
     this.setState({ display })
   }
 
@@ -72,8 +76,8 @@ class App extends Component {
       <div className="App">
         <div className="main-container">
           <header className="App-header">
-            <h1 className="App-title">Star</h1>
-            <h1 className="App-title">Wars</h1>
+            <h1 className="App-title">Swapi</h1>
+            <h1 className="App-title">Box</h1>
           </header>
           <hr />
           <Nav navToggle={this.navToggle.bind(this)}/>

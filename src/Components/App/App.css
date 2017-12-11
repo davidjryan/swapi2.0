@@ -21,7 +21,6 @@ hr {
 
 .App-header {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   background-image: url(../../rogue-one-gallery32_ea791280.jpeg);
   background-size: cover;

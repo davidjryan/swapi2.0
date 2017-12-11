@@ -40,7 +40,6 @@ export function buildPeople(people) {
   const built = people.map(async(person) => {
     const { homeworld, population } = await fetchHomeworld(person.homeworld)
     const { species } = await fetchSpecies(person.species[0])
-    debugger;
 
     return Object.assign( person, { homeworld, population, species })
   })
@@ -73,12 +72,38 @@ export async function fetchPlanets() {
   return results;
 }
 
+export function cleanPlanets(planets) {
+  const cleaned = planets.map((planet) => {
+    let { name, terrain, population, climate, residents } = planet
+
+
+    return { name, terrain, population, climate, residents, favorite: false }
+  });
+
+  return cleaned;
+}
+
 export async function fetchResident(endpoint) {
   const response = await fetch(`${endpoint}`)
   const residentData = await response.json()
-  const { results } = residentData
+  const { name } = residentData
 
-  return results
+  return name
+}
+
+export function buildPlanets(planets) {
+  const build = planets.map(async(planet) => {
+    let residents = await planet.residents.map(async(resident) => {
+      const name = await fetchResident(resident)
+      return name
+    })
+
+    residents = await Promise.all(residents)
+
+    return Object.assign(planet, { residents })
+  })
+
+  return Promise.all(build)
 }
 
 // export async function getResidents(residents) {
