@@ -63,7 +63,8 @@ class App extends Component {
       <div className="App">
         <div className="main-container">
           <header className="App-header">
-            <h1 className="App-title">Star Wars</h1>
+            <h1 className="App-title">Star</h1>
+            <h1 className="App-title">Wars</h1>
           </header>
           <hr />
           <Nav navToggle={this.navToggle.bind(this)}/>

@@ -1,11 +1,12 @@
 import React from 'react';
+import './Crawl.css'
 
 const Crawl = ({dataSet}) => {;
   const {crawl, title, date} = dataSet;
   return (
     <section className="Card-container Crawl-container">
-      <p>{crawl}</p>
       <h3>{title}</h3>
+      <p>{crawl}</p>
       <p>{date}</p>
     </section>
   )

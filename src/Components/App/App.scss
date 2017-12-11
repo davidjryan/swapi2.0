@@ -28,13 +28,18 @@ hr {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  background-color: grey;
-  height: 150px;
+  background-image: url(../../rogue-one-gallery32_ea791280.jpeg);
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+  height: 300px;
   color: white;
 }
 
 .App-title {
   font-size: 1.5em;
+  color: #FED230;
+  margin: 0;
 }
 
 .App-intro {
@@ -48,6 +53,10 @@ hr {
 
 .Data-nav button {
   margin: 50px;
+}
+
+.Crawl-Container p {
+  color: #FED230
 }
 
 .Card-container {
