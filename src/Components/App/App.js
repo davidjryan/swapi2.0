@@ -22,7 +22,9 @@ class App extends Component {
     this.state = {
       crawl: null,
       people: [],
+      peopleFetch: false,
       planets: [],
+      planetFetch: false,
       vehicles: [],
       favorites: [],
       display: 'crawl'
@@ -50,20 +52,15 @@ class App extends Component {
   }
 
   async navToggle(display) {
-    const { people, planets } = this.state;
+    const { people, planets, peopleFetch, planetFetch } = this.state;
     let build;
-    let peopleCount = 0;
-    let planetCount = 0;
 
-
-    if (display === 'people' && peopleCount === 0) {
+    if (display === 'people' && !peopleFetch) {
       build = await buildPeople(people);
-      peopleCount++;
-      this.setState({ people: build, display });
-    } else if (display === 'planets' && planetCount === 0) {
+      this.setState({ people: build, display, peopleFetch: true });
+    } else if (display === 'planets' && !planetFetch) {
       build = await buildPlanets(planets);
-      planetCount++;
-      this.setState({ planets: build, display });
+      this.setState({ planets: build, display, planetFetch: true });
     }
 
     this.setState({ display });
@@ -82,7 +79,7 @@ class App extends Component {
   }
 
   render() {
-    const { display, crawl } = this.state;
+    const { display, crawl, favorites } = this.state;
     if (crawl) {
       return (
         <div className="App">
@@ -91,7 +88,7 @@ class App extends Component {
               <h1 className="App-title">SwapiBox</h1>
             </header>
             <hr />
-            <Nav navToggle={this.navToggle.bind(this)}/>
+            <Nav navToggle={this.navToggle.bind(this)}                  favLength={favorites.length}/>
             <CardContainer dataSet={this.state[display]} display={display}
             favoriteToggle={this.favoriteToggle.bind(this)}/>
           </div>
